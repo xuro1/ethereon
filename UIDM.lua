@@ -102,7 +102,7 @@ library.themes = {
     {
         name = 'Default',
         theme = {
-            ["Accent"]                    = fromrgb(64, 0, 255);
+            ["Accent"]                    = fromrgb(0, 247, 255);
             ["Background"]                = fromrgb(18,18,18);
             ["Border"]                    = fromrgb(0,0,0);
             ["Border 1"]                  = fromrgb(60,60,60);
@@ -178,32 +178,6 @@ library.themes = {
         }
     },
     {
-        name = 'Nekocheat Blue',
-        theme = {
-            ["Accent"]                    = fromrgb(0, 247, 255);
-            ["Background"]                = fromrgb(18,18,18);
-            ["Border"]                    = fromrgb(0,0,0);
-            ["Border 1"]                  = fromrgb(60,60,60);
-            ["Border 2"]                  = fromrgb(18,18,18);
-            ["Border 3"]                  = fromrgb(10,10,10);
-            ["Primary Text"]              = fromrgb(255,255,255);
-            ["Group Background"]          = fromrgb(18,18,18);
-            ["Selected Tab Background"]   = fromrgb(18,18,18);
-            ["Unselected Tab Background"] = fromrgb(18,18,18);
-            ["Selected Tab Text"]         = fromrgb(245,245,245);
-            ["Unselected Tab Text"]       = fromrgb(145,145,145);
-            ["Section Background"]        = fromrgb(18,18,18);
-            ["Option Text 1"]             = fromrgb(255,255,255);
-            ["Option Text 2"]             = fromrgb(255,255,255);
-            ["Option Text 3"]             = fromrgb(255,255,255);
-            ["Option Border 1"]           = fromrgb(50,50,50);
-            ["Option Border 2"]           = fromrgb(0,0,0);
-            ["Option Background"]         = fromrgb(23,23,23);
-            ["Risky Text"]                = fromrgb(175, 21, 21);
-            ["Risky Text Enabled"]        = fromrgb(255, 41, 41);
-        }
-    },
-    {
         name = 'Fatality',
         theme = {
             ['Accent']                    = fromrgb(197,7,83);
@@ -225,32 +199,6 @@ library.themes = {
             ['Option Border 1']           = fromrgb(60,53,93);
             ['Option Border 2']           = fromrgb(0,0,0);
             ['Option Background']         = fromrgb(29,23,66);
-            ["Risky Text"]                = fromrgb(175, 21, 21);
-            ["Risky Text Enabled"]        = fromrgb(255, 41, 41);
-        }
-    },
-    {
-        name = 'Gamesense',
-        theme = {
-            ['Accent']                    = fromrgb(147,184,26);
-            ['Background']                = fromrgb(17,17,17);
-            ['Border']                    = fromrgb(0,0,0);
-            ['Border 1']                  = fromrgb(47,47,47);
-            ['Border 2']                  = fromrgb(17,17,17);
-            ['Border 3']                  = fromrgb(10,10,10);
-            ['Primary Text']              = fromrgb(235,235,235);
-            ['Group Background']          = fromrgb(17,17,17);
-            ['Selected Tab Background']   = fromrgb(17,17,17);
-            ['Unselected Tab Background'] = fromrgb(17,17,17);
-            ['Selected Tab Text']         = fromrgb(245,245,245);
-            ['Unselected Tab Text']       = fromrgb(145,145,145);
-            ['Section Background']        = fromrgb(17,17,17);
-            ['Option Text 1']             = fromrgb(245,245,245);
-            ['Option Text 2']             = fromrgb(195,195,195);
-            ['Option Text 3']             = fromrgb(145,145,145);
-            ['Option Border 1']           = fromrgb(47,47,47);
-            ['Option Border 2']           = fromrgb(0,0,0);
-            ['Option Background']         = fromrgb(35,35,35);
             ["Risky Text"]                = fromrgb(175, 21, 21);
             ["Risky Text Enabled"]        = fromrgb(255, 41, 41);
         }
@@ -4609,7 +4557,7 @@ function library:init()
                 {'00:00:00', true},
                 {'M, D, Y', true},
             };
-            lock = 'Top Left';
+            lock = '';
             position = newUDim2(0,0,0,0);
             refreshrate = 25;
         }
@@ -4851,7 +4799,7 @@ function library:CreateSettingsTab(menu)
     mainSection:AddSlider({text = 'Custom X', flag = 'watermark_x', suffix = '%', min = 0, max = 100, increment = .1});
     mainSection:AddSlider({text = 'Custom Y', flag = 'watermark_y', suffix = '%', min = 0, max = 100, increment = .1});
 
-    local themeStrings = {"Gamesense"};
+    local themeStrings = {"Custom"};
     for _,v in next, library.themes do
         table.insert(themeStrings, v.name)
     end
