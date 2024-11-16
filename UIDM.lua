@@ -4705,7 +4705,6 @@ function library:init()
     local lasttick = tick();
     utility:Connection(runservice.RenderStepped, function(step)
         library.stats.fps = floor(1/step)
-        library.stats.ping = stats.Network.ServerStatsItem["Data Ping"]:GetValue()
         library.stats.sendkbps = stats.DataSendKbps
         library.stats.receivekbps = stats.DataReceiveKbps
 
