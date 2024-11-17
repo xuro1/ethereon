@@ -4702,14 +4702,14 @@ function library:init()
         end
     end
 
-    local lasttick = tick();
-    utility:Connection(runservice.RenderStepped, function(step)
-        library.stats.fps = floor(1/step)
+    local lasttick = tick()
+    runservice.RenderStepped:Connect(function(step)
+        library.stats.fps = floor(1 / step)
         library.stats.ping = stats.Network.ServerStatsItem["Data Ping"]:GetValue()
         library.stats.sendkbps = stats.DataSendKbps
         library.stats.receivekbps = stats.DataReceiveKbps
 
-        if (tick()-lasttick)*1000 > library.watermark.refreshrate then
+        if (tick() - lasttick) * 1000 > library.watermark.refreshrate then
             lasttick = tick()
             library.watermark:Update()
         end
