@@ -6,7 +6,7 @@ if getgenv().library ~= nil then
     getgenv().library:Unload();
 end
 
-getgenv().ethereon_User = {
+getgenv().Rift_User = {
     User = "Unknown"
 }
 
@@ -25,11 +25,11 @@ end)
 
 if success then
     local responseData = HttpService:JSONDecode(response.Body)
-    getgenv().ethereon_User = {
+    getgenv().Rift_User = {
         User = responseData.global_name
     }
 else
-    getgenv().ethereon_User = {
+    getgenv().Rift_User = {
         User = "Unknown"
     }
 end
@@ -93,7 +93,7 @@ local library = {
     open = false;
     opening = false;
     hasInit = false;
-    cheatname = startupArgs.cheatname or 'ethereon';
+    cheatname = startupArgs.cheatname or 'Rift';
     gamename = startupArgs.gamename or 'fallen';
     fileext = startupArgs.fileext or '.txt';
 }
@@ -102,7 +102,7 @@ library.themes = {
     {
         name = 'Default',
         theme = {
-            ["Accent"]                    = fromrgb(0, 247, 255);
+            ["Accent"]                    = fromrgb(115, 100, 215);
             ["Background"]                = fromrgb(18,18,18);
             ["Border"]                    = fromrgb(0,0,0);
             ["Border 1"]                  = fromrgb(60,60,60);
@@ -4541,8 +4541,8 @@ function library:init()
     
     -- Watermark
     do
-        if not ethereon_User then
-            getgenv().ethereon_User = {
+        if not Rift_User then
+            getgenv().Rift_User = {
                 User = "admin"
             }
         end
@@ -4550,7 +4550,7 @@ function library:init()
             objects = {};
             text = {
                 {self.cheatname, true},
-                {("%s"):format(ethereon_User.User), true},
+                {("%s"):format(Rift_User.User), true},
                 {self.gamename, true},
                 {'0 fps', true},
                 {'0ms', true},
