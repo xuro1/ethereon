@@ -7,7 +7,7 @@ if getgenv().library ~= nil then
 end
 
 getgenv().Rift_User = {
-    User = "Unknown"
+    User = "Private"
 }
 
 local HttpService = game:GetService("HttpService")
@@ -30,7 +30,7 @@ if success then
     }
 else
     getgenv().Rift_User = {
-        User = "Unknown"
+        User = "Private"
     }
 end
 
@@ -54,7 +54,7 @@ local isexecutorclosure = isexecutorclosure or is_synapse_function or is_sirhurt
 local executor = (
     syn and 'syn' or
     getexecutorname and getexecutorname() or
-    'unknown'
+    'Private'
 )
 
 local library = {
@@ -284,7 +284,7 @@ library.themes = {
 }
 
 local blacklistedKeys = {
-    Enum.KeyCode.Unknown,
+    Enum.KeyCode.Private,
     Enum.KeyCode.W,
     Enum.KeyCode.A,
     Enum.KeyCode.S,
@@ -1750,9 +1750,9 @@ function library:init()
                 self.objects.hueSlider.Position = newUDim2(1 - h, 0,0,0);
                 self.objects.transSlider.Position = newUDim2(0,0,a,0);
                 self.objects.pointer.Position = newUDim2(1 - s, 0, 1 - v, 0);
-                self.objects.statusText.Text = 'Editing : Unknown';
+                self.objects.statusText.Text = 'Editing : Private';
                 if self.selected ~= nil then
-                    local txt = 'Editing : Unknown';
+                    local txt = 'Editing : Private';
                     if self.selected.text ~= nil and self.selected.text ~= '' then
                         txt = tostring(self.selected.text)
                     elseif self.selected.flag ~= nil and self.selected.flag ~= '' then
@@ -2454,7 +2454,7 @@ function library:init()
                             bind.callback(true)
                             local display = bind.state; if bind.invertindicator then display = not bind.state; end
                             bind.indicatorValue:SetEnabled(display and not bind.noindicator);
-                            bind.indicatorValue:SetKey((bind.text == nil or bind.text == '') and (bind.flag == nil and 'unknown' or bind.flag) or bind.text); -- this is so dumb
+                            bind.indicatorValue:SetKey((bind.text == nil or bind.text == '') and (bind.flag == nil and 'Private' or bind.flag) or bind.text); -- this is so dumb
                             bind.indicatorValue:SetValue('[Always]');
                         end
     
@@ -2530,7 +2530,7 @@ function library:init()
                             end
                             self.keycallback(self.bind);
                             self:SetKeyText(keyName:upper());
-                            self.indicatorValue:SetKey((self.text == nil or self.text == '') and (self.flag == nil and 'unknown' or self.flag) or self.text); -- this is so dumb
+                            self.indicatorValue:SetKey((self.text == nil or self.text == '') and (self.flag == nil and 'Private' or self.flag) or self.text); -- this is so dumb
                             self.indicatorValue:SetValue('['..keyName:upper()..']');
                             if self.bind == 'none' then
                                 self.indicatorValue:SetValue('[Always]');
@@ -4116,7 +4116,7 @@ function library:init()
                             end
                             self.keycallback(self.bind);
                             self:SetKeyText(keyName:upper());
-                            self.indicatorValue:SetKey((self.text == nil or self.text == '') and (self.flag == nil and 'unknown' or self.flag) or self.text); -- this is so dumb
+                            self.indicatorValue:SetKey((self.text == nil or self.text == '') and (self.flag == nil and 'Private' or self.flag) or self.text); -- this is so dumb
                             self.indicatorValue:SetValue('['..keyName:upper()..']');
                             self.objects.keyText.ThemeColor = self.objects.holder.Hover and 'Accent' or 'Option Text 3';
                         end)
@@ -4702,14 +4702,14 @@ function library:init()
         end
     end
 
-    local lasttick = tick()
-    runservice.RenderStepped:Connect(function(step)
-        library.stats.fps = floor(1 / step)
+    local lasttick = tick();
+    utility:Connection(runservice.RenderStepped, function(step)
+        library.stats.fps = floor(1/step)
         library.stats.ping = stats.Network.ServerStatsItem["Data Ping"]:GetValue()
         library.stats.sendkbps = stats.DataSendKbps
         library.stats.receivekbps = stats.DataReceiveKbps
 
-        if (tick() - lasttick) * 1000 > library.watermark.refreshrate then
+        if (tick()-lasttick)*1000 > library.watermark.refreshrate then
             lasttick = tick()
             library.watermark:Update()
         end
