@@ -6,7 +6,7 @@ if getgenv().library ~= nil then
     getgenv().library:Unload();
 end
 
-getgenv().Rift_User = {
+getgenv().auralis_User = {
     User = "Private"
 }
 
@@ -25,11 +25,11 @@ end)
 
 if success then
     local responseData = HttpService:JSONDecode(response.Body)
-    getgenv().Rift_User = {
+    getgenv().auralis_User = {
         User = responseData.global_name
     }
 else
-    getgenv().Rift_User = {
+    getgenv().auralis_User = {
         User = "Private"
     }
 end
@@ -93,7 +93,7 @@ local library = {
     open = false;
     opening = false;
     hasInit = false;
-    cheatname = startupArgs.cheatname or 'rift.cc';
+    cheatname = startupArgs.cheatname or 'auralis.cc';
     gamename = startupArgs.gamename or 'fallen';
     fileext = startupArgs.fileext or '.txt';
 }
@@ -102,7 +102,7 @@ library.themes = {
     {
         name = 'Default',
         theme = {
-            ["Accent"]                    = fromrgb(64, 0, 255);
+            ["Accent"]                    = fromrgb(0, 255, 255);
             ["Background"]                = fromrgb(18,18,18);
             ["Border"]                    = fromrgb(0,0,0);
             ["Border 1"]                  = fromrgb(60,60,60);
@@ -4593,8 +4593,8 @@ function library:init()
     
     -- Watermark
     do
-        if not Rift_User then
-            getgenv().Rift_User = {
+        if not auralis_User then
+            getgenv().auralis_User = {
                 User = "admin"
             }
         end
@@ -4602,7 +4602,7 @@ function library:init()
             objects = {};
             text = {
                 {self.cheatname, true},
-                {("%s"):format(Rift_User.User), true},
+                {("%s"):format(auralis_User.User), true},
                 {self.gamename, true},
                 {'0 fps', true},
                 {'0ms', true},
