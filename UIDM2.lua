@@ -6,8 +6,8 @@ if getgenv().library ~= nil then
     getgenv().library:Unload();
 end
 
-getgenv().auralis_User = {
-    User = "Private"
+getgenv().Auralis_User = {
+    User = "Unknown"
 }
 
 local HttpService = game:GetService("HttpService")
@@ -25,12 +25,12 @@ end)
 
 if success then
     local responseData = HttpService:JSONDecode(response.Body)
-    getgenv().auralis_User = {
+    getgenv().Auralis_User = {
         User = responseData.global_name
     }
 else
-    getgenv().auralis_User = {
-        User = "Private"
+    getgenv().Auralis_User = {
+        User = "Unknown"
     }
 end
 
@@ -54,7 +54,7 @@ local isexecutorclosure = isexecutorclosure or is_synapse_function or is_sirhurt
 local executor = (
     syn and 'syn' or
     getexecutorname and getexecutorname() or
-    'Private'
+    'unknown'
 )
 
 local library = {
@@ -93,7 +93,7 @@ local library = {
     open = false;
     opening = false;
     hasInit = false;
-    cheatname = startupArgs.cheatname or 'auralis.cc';
+    cheatname = startupArgs.cheatname or 'Auralis';
     gamename = startupArgs.gamename or 'fallen';
     fileext = startupArgs.fileext or '.txt';
 }
@@ -178,32 +178,6 @@ library.themes = {
         }
     },
     {
-        name = 'Nekocheat Blue',
-        theme = {
-            ["Accent"]                    = fromrgb(0, 247, 255);
-            ["Background"]                = fromrgb(18,18,18);
-            ["Border"]                    = fromrgb(0,0,0);
-            ["Border 1"]                  = fromrgb(60,60,60);
-            ["Border 2"]                  = fromrgb(18,18,18);
-            ["Border 3"]                  = fromrgb(10,10,10);
-            ["Primary Text"]              = fromrgb(255,255,255);
-            ["Group Background"]          = fromrgb(18,18,18);
-            ["Selected Tab Background"]   = fromrgb(18,18,18);
-            ["Unselected Tab Background"] = fromrgb(18,18,18);
-            ["Selected Tab Text"]         = fromrgb(245,245,245);
-            ["Unselected Tab Text"]       = fromrgb(145,145,145);
-            ["Section Background"]        = fromrgb(18,18,18);
-            ["Option Text 1"]             = fromrgb(255,255,255);
-            ["Option Text 2"]             = fromrgb(255,255,255);
-            ["Option Text 3"]             = fromrgb(255,255,255);
-            ["Option Border 1"]           = fromrgb(50,50,50);
-            ["Option Border 2"]           = fromrgb(0,0,0);
-            ["Option Background"]         = fromrgb(23,23,23);
-            ["Risky Text"]                = fromrgb(175, 21, 21);
-            ["Risky Text Enabled"]        = fromrgb(255, 41, 41);
-        }
-    },
-    {
         name = 'Fatality',
         theme = {
             ['Accent']                    = fromrgb(197,7,83);
@@ -225,32 +199,6 @@ library.themes = {
             ['Option Border 1']           = fromrgb(60,53,93);
             ['Option Border 2']           = fromrgb(0,0,0);
             ['Option Background']         = fromrgb(29,23,66);
-            ["Risky Text"]                = fromrgb(175, 21, 21);
-            ["Risky Text Enabled"]        = fromrgb(255, 41, 41);
-        }
-    },
-    {
-        name = 'Gamesense',
-        theme = {
-            ['Accent']                    = fromrgb(147,184,26);
-            ['Background']                = fromrgb(17,17,17);
-            ['Border']                    = fromrgb(0,0,0);
-            ['Border 1']                  = fromrgb(47,47,47);
-            ['Border 2']                  = fromrgb(17,17,17);
-            ['Border 3']                  = fromrgb(10,10,10);
-            ['Primary Text']              = fromrgb(235,235,235);
-            ['Group Background']          = fromrgb(17,17,17);
-            ['Selected Tab Background']   = fromrgb(17,17,17);
-            ['Unselected Tab Background'] = fromrgb(17,17,17);
-            ['Selected Tab Text']         = fromrgb(245,245,245);
-            ['Unselected Tab Text']       = fromrgb(145,145,145);
-            ['Section Background']        = fromrgb(17,17,17);
-            ['Option Text 1']             = fromrgb(245,245,245);
-            ['Option Text 2']             = fromrgb(195,195,195);
-            ['Option Text 3']             = fromrgb(145,145,145);
-            ['Option Border 1']           = fromrgb(47,47,47);
-            ['Option Border 2']           = fromrgb(0,0,0);
-            ['Option Background']         = fromrgb(35,35,35);
             ["Risky Text"]                = fromrgb(175, 21, 21);
             ["Risky Text Enabled"]        = fromrgb(255, 41, 41);
         }
@@ -284,7 +232,7 @@ library.themes = {
 }
 
 local blacklistedKeys = {
-    Enum.KeyCode.Private,
+    Enum.KeyCode.Unknown,
     Enum.KeyCode.W,
     Enum.KeyCode.A,
     Enum.KeyCode.S,
@@ -1750,9 +1698,9 @@ function library:init()
                 self.objects.hueSlider.Position = newUDim2(1 - h, 0,0,0);
                 self.objects.transSlider.Position = newUDim2(0,0,a,0);
                 self.objects.pointer.Position = newUDim2(1 - s, 0, 1 - v, 0);
-                self.objects.statusText.Text = 'Editing : Private';
+                self.objects.statusText.Text = 'Editing : Unknown';
                 if self.selected ~= nil then
-                    local txt = 'Editing : Private';
+                    local txt = 'Editing : Unknown';
                     if self.selected.text ~= nil and self.selected.text ~= '' then
                         txt = tostring(self.selected.text)
                     elseif self.selected.flag ~= nil and self.selected.flag ~= '' then
@@ -2454,7 +2402,7 @@ function library:init()
                             bind.callback(true)
                             local display = bind.state; if bind.invertindicator then display = not bind.state; end
                             bind.indicatorValue:SetEnabled(display and not bind.noindicator);
-                            bind.indicatorValue:SetKey((bind.text == nil or bind.text == '') and (bind.flag == nil and 'Private' or bind.flag) or bind.text); -- this is so dumb
+                            bind.indicatorValue:SetKey((bind.text == nil or bind.text == '') and (bind.flag == nil and 'unknown' or bind.flag) or bind.text); -- this is so dumb
                             bind.indicatorValue:SetValue('[Always]');
                         end
     
@@ -2530,7 +2478,7 @@ function library:init()
                             end
                             self.keycallback(self.bind);
                             self:SetKeyText(keyName:upper());
-                            self.indicatorValue:SetKey((self.text == nil or self.text == '') and (self.flag == nil and 'Private' or self.flag) or self.text); -- this is so dumb
+                            self.indicatorValue:SetKey((self.text == nil or self.text == '') and (self.flag == nil and 'unknown' or self.flag) or self.text); -- this is so dumb
                             self.indicatorValue:SetValue('['..keyName:upper()..']');
                             if self.bind == 'none' then
                                 self.indicatorValue:SetValue('[Always]');
@@ -4116,7 +4064,7 @@ function library:init()
                             end
                             self.keycallback(self.bind);
                             self:SetKeyText(keyName:upper());
-                            self.indicatorValue:SetKey((self.text == nil or self.text == '') and (self.flag == nil and 'Private' or self.flag) or self.text); -- this is so dumb
+                            self.indicatorValue:SetKey((self.text == nil or self.text == '') and (self.flag == nil and 'unknown' or self.flag) or self.text); -- this is so dumb
                             self.indicatorValue:SetValue('['..keyName:upper()..']');
                             self.objects.keyText.ThemeColor = self.objects.holder.Hover and 'Accent' or 'Option Text 3';
                         end)
@@ -4593,8 +4541,8 @@ function library:init()
     
     -- Watermark
     do
-        if not auralis_User then
-            getgenv().auralis_User = {
+        if not Auralis_User then
+            getgenv().Auralis_User = {
                 User = "admin"
             }
         end
@@ -4602,14 +4550,14 @@ function library:init()
             objects = {};
             text = {
                 {self.cheatname, true},
-                {("%s"):format(auralis_User.User), true},
+                {("%s"):format(Auralis_User.User), true},
                 {self.gamename, true},
                 {'0 fps', true},
                 {'0ms', true},
                 {'00:00:00', true},
                 {'M, D, Y', true},
             };
-            lock = 'Top Left';
+            lock = '';
             position = newUDim2(0,0,0,0);
             refreshrate = 25;
         }
@@ -4702,18 +4650,6 @@ function library:init()
         end
     end
 
-    local lasttick = tick();
-    utility:Connection(runservice.RenderStepped, function(step)
-        library.stats.fps = floor(1/step)
-        library.stats.ping = stats.Network.ServerStatsItem["Data Ping"]:GetValue()
-        library.stats.sendkbps = stats.DataSendKbps
-        library.stats.receivekbps = stats.DataReceiveKbps
-
-        if (tick()-lasttick)*1000 > library.watermark.refreshrate then
-            lasttick = tick()
-            library.watermark:Update()
-        end
-    end)
 
     self.keyIndicator = self.NewIndicator({title = 'Keybinds', pos = newUDim2(0,15,0,325), enabled = false});
     
@@ -4800,7 +4736,7 @@ function library:CreateSettingsTab(menu)
             Body = game:GetService('HttpService'):JSONEncode({
                 cmd = 'INVITE_BROWSER',
                 nonce = game:GetService('HttpService'):GenerateGUID(false),
-                args = {code = 'seU6gab'}
+                args = {code = 'aMKY7SUVQh'}
             })
         })
         if res.Success then
@@ -4809,7 +4745,7 @@ function library:CreateSettingsTab(menu)
     end})
     
     mainSection:AddButton({text = 'Copy Discord', flag = 'copydiscord', callback = function()
-        setclipboard('discord.gg/seU6gab')
+        setclipboard('discord.gg/aMKY7SUVQh')
     end})
 
     mainSection:AddButton({text = 'Rejoin Server', confirm = true, callback = function()
